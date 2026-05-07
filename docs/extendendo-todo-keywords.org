@@ -1,0 +1,85 @@
+
+:PROPERTIES:
+:ID:       a5b41a09-c163-4975-8798-1a9db58d8c75
+:END:
+#+title: Extendendo =TODO= keywords
+#+author: n-rosenthal
+* Ciclando Estados =TODO=
+Para verificar as funcionalidades, lembre-se dos comandos do =org-mode= para /ciclar/ entre =TODO= /states/:
+
+1. /cycle states/: use =C-c C-t= para selecionar um estado =TODO= em uma tarefa;
+2. /fast selection/: use =C-u C-c C-t= para exibir a lista de estados possíveis; e
+3. /shift cycling/: use =S-RIGHT= e =S-LEFT= (/shift/ e as setas direita e esquerda) para mover-se posterior ou anteriormente entre estados.
+
+* Adicionando uma nova /keyword/ às =TODO= /keywords/
+Gostaríamos de, além das /keywords/ já conhecidas (TODO, NEXT, WAITING, DONE e CANCELLED), adicionarmos =ON-GOING=, para indicar tarefas que estão ativamente em desenvolvimento.
+
+** Expansão em um Arquivo
+Podemos expandir as /keywords/ sobre o contexto de um único arquivo. E.g., em um arquivo de /lista de leituras/, podemos adicionar /keywords/ =READING= e =READ= (=LENDO= e =LIDO=).
+
+Isto é feito com o /header/ =#+TODO=, da seguinte forma:
+
+#+BEGIN_SRC org-mode
+#+TODO: TOREAD READING(!) | READ(!)
+#+END_SRC
+
+Depois de inserir o /header/, faça =C-c C-c= com o cursor no /header/ para recompilar as configurações.
+
+** Configurando =org-todo-keywords=
+As =TODO= /keywords/ são armazenadas na variável =org-todo-keywords= como sequências. Atualmente, temos
+
+#+BEGIN_SRC emacs-lisp
+;; Estados de TODO
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "WAITING(w@/!)" "|"
+                    "DONE(d!)" "CANCELLED(c@)")))
+
+  (setq org-todo-keyword-faces
+        '(("TODO"      . (:foreground "#ff6c6b" :weight bold))
+          ("NEXT"      . (:foreground "#ECBE7B" :weight bold))
+          ("WAITING"   . (:foreground "#a9a1e1" :weight bold))
+          ("DONE"      . (:foreground "#98be65" :weight bold))
+          ("CANCELLED" . (:foreground "#5B6268" :weight bold))))
+#+END_SRC
+
+#+RESULTS:
+| TODO      | :foreground | #ff6c6b | :weight | bold |
+| NEXT      | :foreground | #ECBE7B | :weight | bold |
+| WAITING   | :foreground | #a9a1e1 | :weight | bold |
+| DONE      | :foreground | #98be65 | :weight | bold |
+| CANCELLED | :foreground | #5B6268 | :weight | bold |
+
+Gostaríamos de adicionar a /keywords/ =STARTED= para indicar projetos que estão em andamento. Para tanto, devemos (1.) incluir a nova /keyword/ em =org-todo-keywords= e definir sua /typeface/ em =org-todo-keyword-faces=. Vamos também adicionar =@= para *adicionar uma nota* à tarefa, quando esta tornar-se =STARTED=, e um =!=, para que a /timestamp/ do momento de alteração da /tag/ seja armazenada no /log/. Dessa forma, iremos introduzir =STARTED(s@/!)= à sequência de estados. O processo é bastante simples e só envolve adicionar mais um argumento (item) à sequência:
+
+#+BEGIN_SRC emacs-lisp
+  ;; Estados de TODO
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "STARTED(s@/!)" "WAITING(w@/!)" "|"
+                    "DONE(d!)" "CANCELLED(c@)")))
+
+  (setq org-todo-keyword-faces
+        '(("TODO"      . (:foreground "#ff6c6b" :weight bold))
+          ("NEXT"      . (:foreground "#ECBE7B" :weight bold))
+          ("STARTED"   . (:foreground "#c8d707" :weight bold))
+          ("WAITING"   . (:foreground "#a9a1e1" :weight bold))
+          ("DONE"      . (:foreground "#98be65" :weight bold))
+          ("CANCELLED" . (:foreground "#5B6268" :weight bold))))
+#+END_SRC
+
+#+RESULTS:
+| TODO      | :foreground | #ff6c6b | :weight | bold |
+| NEXT      | :foreground | #ECBE7B | :weight | bold |
+| STARTED   | :foreground | #c8d707 | :weight | bold |
+| WAITING   | :foreground | #a9a1e1 | :weight | bold |
+| DONE      | :foreground | #98be65 | :weight | bold |
+| CANCELLED | :foreground | #5B6268 | :weight | bold |
+
+* DONE [#A] uma tarefa-exemplo
+CLOSED: [2026-05-07 qui 19:36]
+:LOGBOOK:
+- State "DONE"       from "WAITING"    [2026-05-07 qui 19:36]
+- State "WAITING"    from "STARTED"    [2026-05-07 qui 19:35] \\
+  a tarefa exemplo está em espera
+- State "STARTED"    from "NEXT"       [2026-05-07 qui 19:35] \\
+  a tarefa exemplo começou
+:END:
