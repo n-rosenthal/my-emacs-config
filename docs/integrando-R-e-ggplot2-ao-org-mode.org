@@ -65,8 +65,6 @@ Podemos visualizar gráficos ou imagens geradas pela =ggplot2= se permitirmos a 
     theme_minimal()
   print(p)
 #+end_src
-
-#+RESULTS:
 [[plot.png]]
 
 ** Configurando /Babel/ para ler e compilar R
