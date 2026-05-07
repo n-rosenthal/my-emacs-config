@@ -67,7 +67,7 @@ Podemos visualizar gráficos ou imagens geradas pela =ggplot2= se permitirmos a 
 #+end_src
 
 #+RESULTS:
-[[file:plot.png]]
+[[plot.png]]
 
 ** Configurando /Babel/ para ler e compilar R
 Em seu =init.el=, ou no módulo específico (e.g. =~/.emacs.d/modules/my-org.el= é necessário configurar /Babel/.
