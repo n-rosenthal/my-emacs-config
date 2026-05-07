@@ -58,7 +58,7 @@ Faça =M-R RET= para iniciar um novo projeto (um processo ESS). Esta é uma fun�
 * Usando /Babel/ em org-mode
 Podemos visualizar gráficos ou imagens geradas pela =ggplot2= se permitirmos a configuração =org-display-inline-images=. Um exemplo de /code block/ para R com /Babel/:
 
-#+begin_src R :results graphics file :file data/plot.png
+#+begin_src R :results graphics file :file plot.png
   library(ggplot2)
   p <- ggplot(mtcars, aes(x = wt, y = mpg)) + 
     geom_point() + 
