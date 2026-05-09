@@ -1,0 +1,54 @@
+#+TITLE: Criando Relatórios Bonitos com org-mode
+#+AUTHOR: Nícolas Rosenthal Dal Corso
+#+DATE: \date
+#+LANGUAGE: pt-br
+
+# Exportação
+#+OPTIONS: toc:3 num:t H:4 ':t ^:nil todo:nil tags:nil
+
+# Classe e pacotes LaTeX
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [12pt,a4paper]
+
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: \usepackage[brazil]{babel}
+
+# Margens
+#+LATEX_HEADER: \usepackage[top=2.5cm,bottom=2.5cm,left=3cm,right=2.5cm]{geometry}
+
+# Tipografia
+#+LATEX_HEADER: \usepackage{lmodern}
+#+LATEX_HEADER: \usepackage{microtype}
+
+# Código-fonte com destaque de sintaxe
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \setminted{fontsize=\small, linenos=false, breaklines=true, bgcolor=gray!6}
+
+# Hiperlinks (deve vir por último entre os pacotes de formatação)
+#+LATEX_HEADER: \usepackage[colorlinks=true, linkcolor=black, urlcolor=blue, citecolor=black]{hyperref}
+
+# Cabeçalho e rodapé
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \pagestyle{fancy}
+#+LATEX_HEADER: \fancyhf{}
+#+LATEX_HEADER: \fancyhead[L]{\small INF01090 — Ciência de Dados}
+#+LATEX_HEADER: \fancyhead[R]{\small Laboratório 5}
+#+LATEX_HEADER: \fancyfoot[C]{\thepage}
+#+LATEX_HEADER: \renewcommand{\headrulewidth}{0.4pt}
+
+# Espaçamento entre linhas
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \setstretch{1.15}
+
+# Blocos de código não-minted (BEGIN_EXAMPLE, BEGIN_SRC sem minted)
+#+LATEX_HEADER: \usepackage{fancyvrb}
+
+#  Mapeamento de ambientes src → minted
+#+LATEX_HEADER: \usepackage{etoolbox}
+
+#  Configuração do exportador
+# Usar minted no lugar do verbatim padrão para blocos #+BEGIN_SRC
+#+LATEX_HEADER_EXTRA: \AtBeginDocument{\setlength{\parskip}{4pt}}
+
+Este é um documento construído exclusivamente para armazenar a configuração atual de /headers/ e propriedades para o desenvolvimento de *relatórios bonitos*. Acesse a [[criando-relatorios-bonitos-com-org-mode.pdf][versão em .PDF]] deste documento, para ver as /features/ atuais e investigue este documento em /raw-mode/ para entender as propriedades do documento.
