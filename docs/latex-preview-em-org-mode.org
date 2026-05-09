@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       ea9bd27a-5fe4-406f-b1ba-869434c18b8a
+:END:
+#+author: n-rosenthal
+#+title: Implementando Preview para Latex em org-mode
+
+Frequentemente, precisamos escrever expressões LaTeX durante o desenvolvimento de um relatório ou de uma nota de estudos.
+
+Isto é facilmente obtível a partir do comando =C-c C-x C-l= (=org-latex-preview=). O [[https://orgmode.org/manual/Previewing-LaTeX-fragments.html][manual para org-mode]] define o comando de forma bastante clara:
+
+#+begin_quote
+Produce a preview image of the LaTeX fragment at point and overlay it over the source code. If there is no fragment at point, process all fragments in the current entry—between two headlines.
+
+When called with a single prefix argument, clear all images in the current entry. Two prefix arguments produce a preview image for all fragments in the buffer, while three of them clear all the images in that buffer.
+#+end_quote
+
+** /Header/ para /preview/
+É possível habilitar de antemão o /preview/ com o /header/ =#+STARTUP=:
+
+- =#+STARTUP: latexpreview= habilita /previewing/ de todos os fragmentos Latex em um documento, enquanto
+- =#+STARTUP: nolatexpreview= desabilita /preview/ de fragmentos Latex.
+
+** Escrevendo fragmentos LaTeX
+Temos, em org-mode, duas maneiras (pelo menos?) de escrever fragmentos Latex. Podemos /enrolar/ uma expressão em =$=, se desejarmos um fragmento /inline/, ou em =$$=, quando quisermos que a expressão seja escrita em nova linha. De maneira análoga, podemos usar os dígrafos =\[= e =\]= para /enrolar/ expressões.
+
+* Comandos para /preview/ de fragmentos Latex
+| comando             | nome da função             | descrição                                                                                    |
+| =C-c C-x C-l=         | =org-preview-latex-fragment= | /preview/ para fragmento sob o cursor, ou para todo o /buffer/, se não há fragmento sob o cursor |
+| =C-u C-c C-x C-l=     |                            | /preview/ para toda sub-árvore sob o cursor                                                    |
+| =C-u C-u C-c C-x C-l= |                            | /preview/ para todo o /buffer/                                                                   |
+
